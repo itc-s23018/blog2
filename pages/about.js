@@ -6,12 +6,23 @@ import {
   TwoColumnMain,
   TwoColumnSidebar
 } from 'components/two-column'
+import Image from 'next/image'
+import eyecatch from 'images/about.jpg'
 import Contact from 'components/contact'
 
 const About = () => {
   return (
     <Container>
       <Hero title='About' subtitle='About development activities' />
+      <Image
+        src={eyecatch}
+        alt=''
+        layout='responsive'
+        width={1152}
+        height={100}
+        priority
+        placeholder='blur'
+      />
       <TwoColumn>
         <TwoColumnMain>
           <PostBody>
