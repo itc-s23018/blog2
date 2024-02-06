@@ -1,5 +1,6 @@
-import { getPostBySlug } from 'lib/api'
+import { getPostBySlug, getAllSlugs } from 'lib/api'
 import { extractText } from 'lib/extract-text'
+import { prevNextPost } from 'lib/prev-next-post'
 import Meta from 'components/meta'
 import Container from 'components/container'
 import PostHeader from 'components/post-header'
@@ -11,6 +12,7 @@ import {
 } from 'components/two-column'
 import ConvertBody from 'components/convert-body'
 import PostCategories from 'components/post-categories'
+import Pagination from 'components/pagination'
 import Image from 'next/image'
 import { getPlaiceholder } from 'plaiceholder'
 import { getImageBuffer } from 'lib/getImageBuffer'
@@ -23,7 +25,9 @@ const Post = ({
   content,
   eyecatch,
   categories,
-  description
+  description,
+  prevPost,
+  nextPost
 }) => {
   return (
     <Container>
@@ -38,6 +42,7 @@ const Post = ({
         <PostHeader title={title} subtitle='Blog Article' publish={publish} />
         <figure>
           <Image
+            key={eyecatch.url}
             src={eyecatch.url}
             alt=''
             layout='responsive'
@@ -59,17 +64,25 @@ const Post = ({
             <PostCategories categories={categories} />
           </TwoColumnSidebar>
         </TwoColumn>
+        <Pagination
+          prevText={prevPost.title}
+          prevUrl={`/blog/${prevPost.slug}`}
+          nextText={nextPost.title}
+          nextUrl={`/blog/${nextPost.slug}`}
+        />
       </article>
     </Container>
   )
 }
 
 const getStaticPaths = async () => {
+  const allSlugs = await getAllSlugs()
   return {
-    paths: ['/blog/schedule', '/blog/music', '/blog/micro'],
+    paths: allSlugs.map(({ slug }) => `/blog/${slug}`),
     fallback: false
   }
 }
+
 const getStaticProps = async context => {
   const slug = context.params.slug
 
@@ -83,6 +96,8 @@ const getStaticProps = async context => {
   const { base64 } = await getPlaiceholder(imageBuffer)
   eyecatch.blurDataURL = base64
 
+  const allSlugs = await getAllSlugs()
+  const [prevPost, nextPost] = prevNextPost(allSlugs, slug)
   return {
     props: {
       title: post.title,
@@ -90,7 +105,9 @@ const getStaticProps = async context => {
       content: post.content,
       eyecatch,
       categories: post.categories,
-      description
+      description,
+      prevPost,
+      nextPost
     }
   }
 }
