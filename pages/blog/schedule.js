@@ -12,6 +12,8 @@ import {
 import ConvertBody from 'components/convert-body'
 import PostCategories from 'components/post-categories'
 import Image from 'next/image'
+import { getPlaiceholder } from 'plaiceholder'
+import { getImageBuffer } from 'lib/getImageBuffer'
 
 import { eyecatchLocal } from 'lib/constants'
 
@@ -43,6 +45,8 @@ const Schedule = ({
             height={eyecatch.height}
             size='(min-width: 1152px) 1152px, 100vw'
             priority
+            placeholder='blur'
+            blurDataURL={eyecatch.blurDataURL}
           />
         </figure>
         <TwoColumn>
@@ -68,6 +72,9 @@ const getStaticProps = async () => {
 
   const eyecatch = post.eyecatch ?? eyecatchLocal
 
+  const imageBuffer = await getImageBuffer(eyecatch.url)
+  const { base64 } = await getPlaiceholder(imageBuffer)
+  eyecatch.blurDataURL = base64
   return {
     props: {
       title: post.title,
