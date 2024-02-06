@@ -5,25 +5,25 @@
 }
 
 @media (min-width: 768px) {
-  .main{
-    width:768px;
+  .main {
+    width: 768px;
   }
 
   .sidebar {
-    width:240px;
+    width: 240px;
     position: sticky;
     top: 40px;
     align-self: flex-start;
   }
-}
 
-.sidebar * {
-  text-align: right;
-}
+  .sidebar * {
+    text-align: right;
+  }
 
-.sidebar :is(div, ul){
-  width: fit-content;
-  margin-left: auto;
-  place-items: flex-end;
-  place-content: flex-end;
+  .sidebar :is(div, ul) {
+    width: fit-content;
+    margin-left: auto;
+    place-items: flex-end;
+    place-content: flex-end;
+  }
 }
