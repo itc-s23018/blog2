@@ -3,7 +3,6 @@ import { useRouter } from 'next/router'
 
 import { siteMeta } from 'lib/constants'
 
-import siteImg from 'images/ogp.jpg'
 const {
   siteTitle,
   siteDesc,
@@ -12,6 +11,8 @@ const {
   siteType,
   siteIcon
 } = siteMeta
+
+import siteImg from 'images/ogp.jpg'
 
 const Meta = ({ pageTitle, pageDesc, pageImg, pageImgW, pageImgH }) => {
   const title = pageTitle ? `${pageTitle} | ${siteTitle}` : siteTitle
@@ -29,8 +30,11 @@ const Meta = ({ pageTitle, pageDesc, pageImg, pageImgW, pageImgH }) => {
   return (
     <Head>
       <title>{title}</title>
-      <meta property='og:title' content={title} />
+      <meta prpperty='og:title' content={title} />
+
       <meta name='description' content={desc} />
+      <meta property='og:description' content={desc} />
+
       <link rel='canonical' href={url} />
       <meta property='og:url' content={url} />
 
