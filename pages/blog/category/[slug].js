@@ -11,7 +11,7 @@ import { eyecatchLocal } from 'lib/constants'
 const Category = ({ name, posts }) => {
   return (
     <Container>
-      <Meta pagititle={name} pagiDesc={`${name}に関する記事`} />
+      <Meta pageTitle={name} pagiDesc={`${name}に関する記事`} />
       <PostHeader title={name} subtitle='Blog Category' />
       <Posts posts={posts} />
     </Container>
