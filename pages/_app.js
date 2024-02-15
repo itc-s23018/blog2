@@ -24,14 +24,14 @@ const MyApp = ({ Component, pageProps }) => {
     <>
       <Script
         async
-        src={`https://www.googletamanager.com/gtag/js?id=${gtag.GA_MEASUREMENR_ID}`}
+        src='https://www.googletagmanager.com/gtag/js?id=G-N1F6D0R4PW'
       />
       <Script>
         {`
         window.dataLayer = window.dataLayer || []; function gtag()
         {dataLayer.push(arguments)}
-        gtag('js', new Date()); gtag('config', '${gtag.GA_MEASUREMENT_ID}');
-    `}
+        gtag('js', new Date()); gtag('config', 'G-N1F6D0R4PW');
+      `}
       </Script>
 
       <Layout>
