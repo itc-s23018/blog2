@@ -22,8 +22,18 @@ const MyApp = ({ Component, pageProps }) => {
   }, [router.events])
   return (
     <>
-        }}
+      <Script
+        async
+        src={`https://www.googletamanager.com/gtag/js?id=${gtag.GA_MEASUREMENR_ID}`}
       />
+      <Script>
+        {`
+        window.dataLayer = window.dataLayer || []; function gtag()
+        {dataLayer.push(arguments)}
+        gtag('js', new Date()); gtag('config', '${gtag.GA_MEASUREMENT_ID}');
+    `}
+      </Script>
+
       <Layout>
         <Component {...pageProps} />
       </Layout>
