@@ -3,6 +3,8 @@ import { useRouter } from 'next/router'
 
 import { siteMeta } from 'lib/constants'
 
+import siteImg from 'images/ogp.jpg'
+
 const {
   siteTitle,
   siteDesc,
@@ -11,8 +13,6 @@ const {
   siteType,
   siteIcon
 } = siteMeta
-
-import siteImg from 'images/ogp.jpg'
 
 const Meta = ({ pageTitle, pageDesc, pageImg, pageImgW, pageImgH }) => {
   const title = pageTitle ? `${pageTitle} | ${siteTitle}` : siteTitle

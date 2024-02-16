@@ -35,7 +35,7 @@ const getStaticProps = async context => {
   const posts = await getAllPostsByCategory(cat.id)
 
   for (const post of posts) {
-    if (!post.hasOwnProperty('eyecatch')) {
+    if (!Object.prototype.hasOwnProperty.call(post, 'eyecatch')) {
       post.eyecatch = eyecatchLocal
     }
     const imageBuffer = await getImageBuffer(post.eyecatch.url)
